@@ -1,0 +1,44 @@
+<style>
+  .modal-content {
+    background-color: #212121
+  }
+</style>
+
+<!-- Vender este artículo -->
+<div class="modal fade" id="Modal-VenderArt-{{ owned_item.id }}"
+     tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    {{ owned_item.name }}
+                </h5>
+                <button type="button" class="btn-close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    {{ selling_form.hidden_tag() }}
+                    <h4 class="text-center">
+                        Seguro que quieres vender tu {{ owned_item.name }} por ${{ owned_item.price }} mxn?
+                    </h4>
+                    <br>
+                    <h6 class="text-center">
+                        Al presionar "Vender!" estás aceptando vender este artículo
+                    </h6>
+                    <br>
+                    <input id="sold_item" name="sold_item" type="hidden" value="{{ owned_item.name }}">
+                    {{ selling_form.submit(class="btn btn-outline-danger btn-block") }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
