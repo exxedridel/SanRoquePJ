@@ -24,18 +24,18 @@ def market_page():
         if p_item_object:
             if current_user.can_purchase(p_item_object):
                 p_item_object.buy(current_user)
-                flash(f"Congratulations! You purchased {p_item_object.name} for ${p_item_object.price} mxn", category='success')
+                flash(f"!Felicidades! Compraste {p_item_object.name} por ${p_item_object.price} mxn", category='success')
             else:
-                flash(f"Unfortunately, you don't have enough money to purchase {p_item_object}", category='danger')
+                flash(f"No cuentas con los fondos suficientes para comprar {p_item_object}", category='danger')
         #Sell Item Logic
         sold_item = request.form.get('sold_item')
         s_item_object = Item.query.filter_by(name=sold_item).first()
         if s_item_object:
             if current_user.can_sell(s_item_object):
                 s_item_object.sell(current_user)
-                flash(f"Felicidades! vendiste tu {s_item_object.name} al Bazar por ${s_item_object.price} mxn", category='success')
+                flash(f"¡Felicidades! vendiste tu {s_item_object.name} al Bazar por ${s_item_object.price} mxn", category='success')
             else:
-                flash(f"F algo salio mal al tratar vender tu {s_item_object.name}", category='danger')
+                flash(f"Algo salio mal al tratar vender tu {s_item_object.name}", category='danger')
 
 
         return redirect(url_for('market_page'))
@@ -56,11 +56,11 @@ def register_page():
         db.session.add(user_to_create)
         db.session.commit()
         login_user(user_to_create)
-        flash(f"Account created successfully! You are now logged in as {user_to_create.username}", category='success')
+        flash(f"¡Cuenta creada satisfactoriamente! Has iniciado sesión como {user_to_create.username}", category='success')
         return redirect(url_for('market_page'))
     if form.errors != {}:  # If there are not errors from the validations
         for err_msg in form.errors.values():
-            flash(f'There was an error with creating a user: {err_msg}', category='danger')
+            flash(f'Hubo un error al crear el usuario: {err_msg}', category='danger')
 
     return render_template('register.html', form=form)
 
@@ -74,10 +74,10 @@ def login_page():
                 attempted_password=form.password.data
         ):
             login_user(attempted_user)
-            flash(f'Success! You are logged in as: {attempted_user.username}', category='success')
+            flash(f'Has iniciado sesión exitosamente como: {attempted_user.username}', category='success')
             return redirect(url_for('market_page'))
         else:
-            flash('Username and password not match! Please try again', category='danger')
+            flash('El usuario y la contraseña no coinciden, intenta de nuevo', category='danger')
 
     return render_template('login.html', form=form)
 
@@ -85,5 +85,5 @@ def login_page():
 @app.route('/logout')
 def logout_page():
     logout_user()
-    flash("You have been logged out!", category='info')
+    flash("Has salido de tu sesión", category='info')
     return redirect(url_for("home_page"))
