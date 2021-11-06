@@ -16,7 +16,9 @@
 <body>
 <!-- Navbar here -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"> BAZAR </a>
+    <a class="navbar-brand" href="{{ url_for('home_page') }}">
+        <img src="{{url_for('static', filename='logo32.png')}}">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,7 +28,7 @@
                 <a class="nav-link" href="{{ url_for('home_page') }}">Inicio<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('market_page') }}">Mercado</a>
+                <a class="nav-link" href="{{ url_for('market_page') }}">Bazar</a>
             </li>
         </ul>
         {% if current_user.is_authenticated %}
@@ -41,7 +43,9 @@
                 <a class="nav-link">Bienvenido, {{ current_user.username }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('logout_page') }}">Salir</a>
+                <a class="nav-link" href="{{ url_for('logout_page') }}">
+                     <img src="{{ url_for('static', filename='salir24.png')}}">
+                </a>
             </li>
         </ul>
         {% else %}
@@ -72,8 +76,6 @@
 
 {% endblock %}
 <!-- Future Content here -->
-
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -92,7 +94,5 @@
       background-color: #212121;
       color: white
       }
-
-
 </style>
 </html>

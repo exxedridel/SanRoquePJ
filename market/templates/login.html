@@ -5,15 +5,18 @@
 {% endblock %}
 
 {% block content %}
+<br>
 <body class="text-center">
     <div class="container">
         <form method="POST" class="form-signin" style="color:white">
             {{ form.hidden_tag() }}
-            <img class="mb-4" src="https://cdn.pixabay.com/photo/2015/02/09/20/03/koala-630117__340.jpg" alt="">
+            <img class="mb-4"
+                 src="{{url_for('static', filename='login.png')}}"
+                 alt="">
             <h1 class="h3 mb-3 font-weight-normal">
                 Inicia sesión
             </h1>
-            <br>
+
             {{ form.username.label() }}
             {{ form.username(class="form-control", placeholder="Usuario") }}
 
@@ -21,15 +24,12 @@
             {{ form.password(class="form-control", placeholder="Contraseña") }}
 
             <br>
-
-
             <div class="checkbox mb-3">
                <h6>¿No tienes cuenta aún?</h6>
                <a class="btn btn-sm btn-secondary" href="{{ url_for('register_page') }}">Regístrate</a>
             </div>
-
             {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
-
+            <br>
         </form>
     </div>
 </body>

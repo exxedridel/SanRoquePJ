@@ -5,12 +5,13 @@ Register Page
 {% endblock %}
 
 {% block content %}
+<br>
 <body class="text-center">
 <div class="container">
     <form method="POST" class="form-register" style="color:white">
         {{ form.hidden_tag() }}
         <img class="mb-4"
-             src="https://cdn.pixabay.com/photo/2015/02/09/20/03/koala-630117__340.jpg"
+             src="{{url_for('static', filename='register.png')}}"
              alt="">
         <h1 class="h3 mb-3 font-weight-normal">
             Bienvenido, crea una cuenta.
