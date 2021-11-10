@@ -6,7 +6,7 @@
 
 {% block content %}
 <br>
-<body class="text-center">
+<div class="text-center">
     <div class="container">
         <form method="POST" class="form-signin" style="color:white">
             {{ form.hidden_tag() }}
@@ -29,8 +29,8 @@
                <a class="btn btn-sm btn-secondary" href="{{ url_for('register_page') }}">Regístrate</a>
             </div>
             {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
-            <br>
         </form>
     </div>
-</body>
+</div>
+<br>
 {% endblock %}

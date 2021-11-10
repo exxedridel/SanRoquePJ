@@ -6,7 +6,7 @@ Register Page
 
 {% block content %}
 <br>
-<body class="text-center">
+<div class="text-center">
 <div class="container">
     <form method="POST" class="form-register" style="color:white">
         {{ form.hidden_tag() }}
@@ -37,8 +37,8 @@ Register Page
         </div>
 
         {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
-
     </form>
 </div>
-</body>
+</div>
+<br>
 {% endblock %}
