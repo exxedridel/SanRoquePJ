@@ -46,6 +46,39 @@ def market_page():
         return render_template('market.html', items=items, purchase_form=purchase_form, owned_items=owned_items, selling_form=selling_form)
 
 
+@app.route('/userprofile', methods=['GET', 'POST'])
+@login_required
+def userprofile_page():
+    purchase_form = PurchaseItemForm()
+    selling_form = SellItemForm()
+    if request.method == "POST":
+        #Purchase Item Logic
+        purchased_item = request.form.get('purchased_item')
+        p_item_object = Item.query.filter_by(name=purchased_item).first()
+        if p_item_object:
+            if current_user.can_purchase(p_item_object):
+                p_item_object.buy(current_user)
+                flash(f"!Felicidades! Compraste {p_item_object.name} por ${p_item_object.price} mxn", category='success')
+            else:
+                flash(f"No cuentas con los fondos suficientes para comprar {p_item_object}", category='danger')
+        #Sell Item Logic
+        sold_item = request.form.get('sold_item')
+        s_item_object = Item.query.filter_by(name=sold_item).first()
+        if s_item_object:
+            if current_user.can_sell(s_item_object):
+                s_item_object.sell(current_user)
+                flash(f"¡Felicidades! vendiste tu {s_item_object.name} al Bazar por ${s_item_object.price} mxn", category='success')
+            else:
+                flash(f"Algo salio mal al tratar vender tu {s_item_object.name}", category='danger')
+
+
+        return redirect(url_for('userprofile_page'))
+
+    if request.method == "GET":
+        items = Item.query.filter_by(owner=None)
+        owned_items = Item.query.filter_by(owner=current_user.id)
+        return render_template('userprofile.html', items=items, purchase_form=purchase_form, owned_items=owned_items, selling_form=selling_form)
+
 @app.route('/register', methods=['GET', 'POST'])
 def register_page():
     form = RegisterForm()

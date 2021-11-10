@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
-{% block title %}
-Pagina del Bazar
-{% endblock %}
-{% block content %}
 
-<div class="row" style="margin-top:20px; margin-left:20px">
-    <div class="col-8">
+{% block title %}
+Página del Bazar
+{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top:20px; margin-left:0">
+    <div class="col-12">
         <h2>Artículos disponibles en el Bazar ChingOnline</h2>
-        <p>Click en un artículo para empezar a comprar</p>
+        <p>Click en "Más Info" para detalles de los artículos</p>
         <br>
         <table class="table table-hover table-dark">
             <thead>
@@ -43,30 +44,5 @@ Pagina del Bazar
             </tbody>
         </table>
     </div>
-    <div class="col-4">
-        <h2>Artículos comprados</h2>
-        <p>Click en vender artículo para ponerlo a la venta</p>
-        <br>
-        <div class="row">
-            {% for owned_item in owned_items %}
-            {% include 'includes/owned_items_modals.html' %}
-            <div class="col-md-6">
-                <div style="margin-bottom: 5px" class="card text-center bg-dark">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ owned_item.name }}</h5>
-                        <button type="button" class="btn btn-outline-danger" style="margin-bottom: 5px"
-                                data-toggle="modal" data-target="#Modal-VenderArt-{{ owned_item.id }}">
-                            Vender artículo
-                        </button>
-                        <p class="card-text"><strong>
-                            Valor: ${{ owned_item.price }} mxn
-                        </strong></p>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
 </div>
-
 {% endblock %}
