@@ -1,21 +1,54 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    ¡Bienvenido a mi bazar online!
+San Roque App
 {% endblock %}
 
 {% block content %}
-    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-dark" style="color:white">
-        <div class="col-md-5 p-lg-1 mx-auto my-1">
-            <img class="mb-4"
-                 src="{{url_for('static', filename='logo128.png')}}"
+<br>
+<div class="container p-2">
+    <h2>21 de enero de 2022</h2>
+    <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Nombre, encargo o depto." aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form>
+</div>
+<br>
+<table class="table table-hover table-light">
+    <thead class="table table-hover table-dark">
+        <tr>
+            <!-- Your Columns HERE -->
+            <!-- <th scope="col">ID</th> -->
+            <th scope="col">Nombre</th>
+            <!-- <th scope="col">Departamento</th> -->
+            <th scope="col">Encargo</th>
+            <th scope="col">Panel</th>
+            <!-- <th scope="col">Actividad</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Your rows inside the table HERE: -->
+        {% for worker in workers %}
+        {% include 'includes/workers_modals.html' %}
+        <tr>
+            <!-- <td>{{ worker.id }}</td> -->
+            <td>{{ worker.fullname }}</td>
+            <!-- <td>{{ worker.department }}</td> -->
+            <td>{{ worker.role }}</td>
+            {% if current_user.is_authenticated %}
+            <td>
+                <img type="button" data-bs-toggle="modal" data-bs-target="#Modal-Ver-{{ worker.id }}"
+                 src="{{url_for('static', filename='tasks32.png')}}"
                  alt="">
-            <h1 class="display-4 font-weight-normal">BAZAR ChingOnline</h1>
-            <p class="lead font-weight-normal" style="color:tomato">¡Los usuarios nuevos obtienen 2,000 pesos de regalo hasta el 12/31/21!</p>
-            <p class="lead font-weight-normal">Empieza a comprar productos semi-nuevos con descuento dando click en el enlace de abajo.</p>
-            <font size="6"><a class="btb btb-primary" href="{{ url_for('market_page') }}">Comenzar</a>
-        </div>
-        <div class="product-device box-shadow d-none d-md-block"></div>
-        <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
-    </div>
+            </td>
+            {% else %}
+            <td>
+                <!-- Button helps login -->
+                <a href="{{ url_for('login_page') }}">Entrar</a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

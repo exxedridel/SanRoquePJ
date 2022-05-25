@@ -1,0 +1,30 @@
+<!-- Modal-Ver -->
+<div class="modal fade" id="Modal-Ver-{{ worker.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">
+                    {{ worker.fullname }}
+                </h5>
+                <a href="mailto:{{ worker.email }}">
+                    <img type="button" src="{{url_for('static', filename='email32.png')}}" alt="">
+                </a>
+            </div>
+            <div class="modal-body">
+                <h6>Depto. {{ worker.department }}</h6>
+                <div class="text-center container p-2">
+                    <h4><strong>Actividad</strong></h4>
+                </div>
+                {{ worker.activity }}
+                <div class="text-center container p-2">
+                    <input type="checkbox" id="cbox1" value="checkbox1"> Enterado</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success">Enviar</button>
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

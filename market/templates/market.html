@@ -5,44 +5,51 @@ Página del Bazar
 {% endblock %}
 
 {% block content %}
-<div class="row" style="margin-top:20px; margin-left:0">
-    <div class="col-12">
-        <h2>Artículos disponibles en el Bazar ChingOnline</h2>
-        <p>Click en "Más Info" para detalles de los artículos</p>
-        <br>
-        <table class="table table-hover table-dark">
-            <thead>
-            <tr>
-                <!-- Your Columns HERE -->
-                <th scope="col">ID</th>
-                <th scope="col">Artículo</th>
-                <th scope="col">Código</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Opciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Your rows inside the table HERE: -->
-            {% for item in items %}
-            {% include 'includes/items_modals.html' %}
-            <tr>
-                <td>{{ item.id }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.barcode }}</td>
-                <td>${{ item.price }} mxn</td>
-                <td>
-                    <button class="btn btn-outline btn-info" data-toggle="modal"
-                            data-target="#Modal-MasInfo-{{ item.id }}">Más Info
-                    </button>
-                    <button class="btn btn-outline btn-success" data-toggle="modal"
-                            data-target="#Modal-ComprarArt-{{ item.id }}">Comprar Ítem
-                    </button>
-                </td>
-            </tr>
-            {% endfor %}
-
-            </tbody>
-        </table>
-    </div>
+<br>
+<div class="text-center">
+    <h2>Programa de Recompensas</h2>
+    <h6>¡Cambia tus fichas de asistencia por increibles productos!</h6>
 </div>
+<div class="row" style="margin-bottom:13px;">
+    <font size="5"><a class="nav-link text-center" style="color: rgb(0, 109, 252); font-weight: bold">
+            <i class="fas fa-coins"></i>
+            {{ current_user.prettier_budget }}
+        </a></font>
+</div>
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <!-- Your Columns HERE -->
+            <!-- <th scope="col">ID</th> -->
+            <th scope="col">Artículo</th>
+            <!-- <th scope="col">Código</th> -->
+            <th scope="col">Precio</th>
+            <th scope="col">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Your rows inside the table HERE: -->
+        {% for item in items %}
+        {% include 'includes/items_modals.html' %}
+        <tr>
+            <!-- <td>{{ item.id }}</td> -->
+            <td>{{ item.name }}</td>
+            <!-- <td>{{ item.barcode }}</td> -->
+            <td>{{ item.price }}</td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#Modal-MasInfo-{{ item.id }}">
+                    Más Info
+                </button>
+                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#Modal-ComprarArt-{{ item.id }}">
+                    Comprar
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
 {% endblock %}

@@ -15,28 +15,30 @@
                     {{ owned_item.name }}
                 </h5>
                 <button type="button" class="btn-close"
-                        data-dismiss="modal"
+                        data-bs-dismiss="modal"
                         aria-label="Close">
                 </button>
             </div>
             <div class="modal-body">
                 <form method="POST">
                     {{ selling_form.hidden_tag() }}
-                    <h4 class="text-center">
-                        Seguro que quieres vender tu {{ owned_item.name }} por ${{ owned_item.price }} mxn?
-                    </h4>
-                    <br>
-                    <h6 class="text-center">
-                        Al presionar "Vender!" estás aceptando vender este artículo
-                    </h6>
-                    <br>
-                    <input id="sold_item" name="sold_item" type="hidden" value="{{ owned_item.name }}">
-                    {{ selling_form.submit(class="btn btn-outline-danger btn-block") }}
+                    <div class="text-center">
+                        <h4>
+                            Seguro que quieres cancelar {{ owned_item.name }} por {{ owned_item.price }} puntos?
+                        </h4>
+                        <br>
+                        <h6>
+                            Al presionar "Cancelar" estás aceptando cancelar el pedido
+                        </h6>
+                        <br>
+                        <input id="sold_item" name="sold_item" type="hidden" value="{{ owned_item.name }}">
+                        {{ selling_form.submit(class="btn btn-outline-danger btn-block") }}
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal">Cerrar
+                        data-bs-dismiss="modal">Cerrar
                 </button>
             </div>
         </div>

@@ -1,6 +1,6 @@
 from market import app
 from flask import render_template, redirect, url_for, flash, request
-from market.models import Item, User
+from market.models import Item, User, Worker
 from market.forms import RegisterForm, LoginForm, PurchaseItemForm, SellItemForm
 from market import db
 from flask_login import login_user, logout_user, login_required, current_user
@@ -9,7 +9,8 @@ from flask_login import login_user, logout_user, login_required, current_user
 @app.route('/')
 @app.route('/home')
 def home_page():
-    return render_template('home.html')
+    workers = Worker.query.all()
+    return render_template('home.html', workers=workers)
 
 
 @app.route('/market', methods=['GET', 'POST'])
@@ -67,7 +68,7 @@ def userprofile_page():
         if s_item_object:
             if current_user.can_sell(s_item_object):
                 s_item_object.sell(current_user)
-                flash(f"¡Felicidades! vendiste tu {s_item_object.name} al Bazar por ${s_item_object.price} mxn", category='success')
+                flash(f"Cancelaste el pedido de {s_item_object.name} exitosamente por {s_item_object.price} puntos", category='success')
             else:
                 flash(f"Algo salio mal al tratar vender tu {s_item_object.name}", category='danger')
 
@@ -78,6 +79,14 @@ def userprofile_page():
         items = Item.query.filter_by(owner=None)
         owned_items = Item.query.filter_by(owner=current_user.id)
         return render_template('userprofile.html', items=items, purchase_form=purchase_form, owned_items=owned_items, selling_form=selling_form)
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route("/manage")
+def manage():
+    return render_template("manage.html")
 
 @app.route('/register', methods=['GET', 'POST'])
 def register_page():
@@ -90,7 +99,7 @@ def register_page():
         db.session.commit()
         login_user(user_to_create)
         flash(f"¡Cuenta creada satisfactoriamente! Has iniciado sesión como {user_to_create.username}", category='success')
-        return redirect(url_for('market_page'))
+        return redirect(url_for('home_page'))
     if form.errors != {}:  # If there are not errors from the validations
         for err_msg in form.errors.values():
             flash(f'Hubo un error al crear el usuario: {err_msg}', category='danger')
@@ -108,7 +117,7 @@ def login_page():
         ):
             login_user(attempted_user)
             flash(f'Has iniciado sesión exitosamente como: {attempted_user.username}', category='success')
-            return redirect(url_for('market_page'))
+            return redirect(url_for('home_page'))
         else:
             flash('El usuario y la contraseña no coinciden, intenta de nuevo', category='danger')
 

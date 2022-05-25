@@ -8,10 +8,10 @@
 <br>
 <div class="text-center">
     <div class="container">
-        <form method="POST" class="form-signin" style="color:white">
+        <form method="POST" class="form-signin" style="color:black">
             {{ form.hidden_tag() }}
             <img class="mb-4"
-                 src="{{url_for('static', filename='login.png')}}"
+                 src="{{url_for('static', filename='usuario128.png')}}"
                  alt="">
             <h1 class="h3 mb-3 font-weight-normal">
                 Inicia sesión
@@ -24,10 +24,6 @@
             {{ form.password(class="form-control", placeholder="Contraseña") }}
 
             <br>
-            <div class="checkbox mb-3">
-               <h6>¿No tienes cuenta aún?</h6>
-               <a class="btn btn-sm btn-secondary" href="{{ url_for('register_page') }}">Regístrate</a>
-            </div>
             {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
         </form>
     </div>

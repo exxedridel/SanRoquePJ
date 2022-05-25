@@ -11,15 +11,15 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(length=30), nullable=False, unique=True)
     email_address = db.Column(db.String(length=50), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=60), nullable=False)
-    budget = db.Column(db.Integer(), nullable=False, default=2000)
+    budget = db.Column(db.Integer(), nullable=False, default=0)
     items = db.relationship('Item', backref='owned_user', lazy=True)
 
     @property
     def prettier_budget(self):
         if len(str(self.budget))  >= 4:
-            return f'${str(self.budget)[:-3]},{str(self.budget)[-3:]} mxn'
+            return f'{str(self.budget)[:-3]},{str(self.budget)[-3:]}'
         else:
-            return f"${self.budget} mxn"
+            return f"{self.budget}"
 
     @property
     def password(self):
@@ -58,3 +58,13 @@ class Item(db.Model):
         self.owner = None
         user.budget += self.price
         db.session.commit()
+
+class Worker(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    fullname = db.Column(db.String(length=50), nullable=False)
+    department = db.Column(db.String(length=50), nullable=False)
+    role = db.Column(db.String(length=50), nullable=False)
+    email = db.Column(db.String(length=50), nullable=False, unique=True)
+    activity = db.Column(db.String(length=255), nullable=False)
+
+    

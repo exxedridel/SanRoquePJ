@@ -7,7 +7,7 @@ Perfil de usuario
 {% block content %}
 <div class="row" style="margin-top:20px; margin-left:20px">
     <div class="col-11">
-        <p>¡Hola {{ current_user.username }}! aquí puedes gestionar tus compras o añadir fondos a tu cuenta</p>
+        <p>¡Hola {{ current_user.username }}! aquí puedes ver los productos que has comprado</p>
         <h2>Artículos comprados</h2>
         <br>
         <div class="row">
@@ -18,11 +18,11 @@ Perfil de usuario
                     <div class="card-body">
                         <h5 class="card-title">{{ owned_item.name }}</h5>
                         <button type="button" class="btn btn-outline-danger" style="margin-bottom: 5px"
-                                data-toggle="modal" data-target="#Modal-VenderArt-{{ owned_item.id }}">
-                            Vender artículo
+                                data-bs-toggle="modal" data-bs-target="#Modal-VenderArt-{{ owned_item.id }}">
+                            Cancelar pedido
                         </button>
                         <p class="card-text"><strong>
-                            Valor: ${{ owned_item.price }} mxn
+                            Valor: {{ owned_item.price }} pts
                         </strong></p>
                     </div>
                 </div>
@@ -33,16 +33,13 @@ Perfil de usuario
 </div>
 <div class="row" style="margin-top:20px; margin-left:20px">
     <div class="col-11">
-        <h2>Añadir fondos</h2>
+        <h2>Términos y condiciones</h2>
         <br>
         <div class="row">
             <div class="col-md-6">
                 <div style="margin-bottom: 5px" class="card text-center bg-dark">
                     <div class="card-body">
-                        <p><a href="#">Fondear a través de VISA</a></p>
-                        <p><a href="#">Fondear a través de MasterCard</a></p>
-                        <p><a href="#">Fondear a través de Oxxo</a></p>
-                        <p><a href="#">Fondear a través de Bitcoin</a></p>
+                        n/a
                     </div>
                 </div>
             </div>
